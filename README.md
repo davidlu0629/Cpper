@@ -21,6 +21,28 @@ C++相關知識
         // now do something with id
     }
     ```
+    other example
+    ```cpp=
+    class MyClass
+    {
+        static DWORD WINAPI StaticThreadStart(void* Param)
+        {
+            MyClass* This = (MyClass*) Param;
+            return This->ThreadStart();
+        }
+
+        DWORD ThreadStart(void)
+        {
+            // Do stuff
+        }
+
+        void startMyThread()
+        {
+           DWORD ThreadID;
+           CreateThread(NULL, 0, StaticThreadStart, (void*) this, 0, &ThreadID);
+        }
+    };
+    ```
 
 ## 開檔共用規則
 * Reference: https://docs.microsoft.com/zh-tw/windows/win32/fileio/creating-and-opening-files
