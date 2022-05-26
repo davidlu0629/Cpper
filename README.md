@@ -104,3 +104,20 @@ int main()
 ```
 #### 2. 進化，不想無限增加的多線程，提供一個消息隊列，多線程會讀隊列的內容，讀到消息後就加以處理 -> I/O完成端口
 * 與端口的關係:應用程序和操作系統溝通的一個接口
+
+### 實現方法
+1. CreateIoCompletionPort (將客戶的socket作為HANDLE傳進隊列)
+  ```cpp
+  HANDLE CreateIoCompletionPort (
+      HANDLE FileHandle,              // handle to file
+      HANDLE ExistingCompletionPort,  // handle to I/O completion port
+      ULONG_PTR CompletionKey,        // completion key
+      DWORD NumberOfConcurrentThreads // number of threads to execute concurrently完成端口上同時允許運行的線程最大數(經驗法則:線程數=CPU數*2+2)
+  );
+  ```
+  * 目的(端口其實就是隊列?)
+    1. 用於創建一個完成端口對象
+    2. 將一個HANDLE和完成端口關連在一起
+
+  * 有的功能
+    1. 每當你向端口關聯一個設備時，系統向該完成端口的設備列表中加入一條信息記錄
