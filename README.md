@@ -121,3 +121,22 @@ int main()
 
   * 有的功能
     1. 每當你向端口關聯一個設備時，系統向該完成端口的設備列表中加入一條信息記錄
+2. GetQueuedCompletionStatus
+  ```cpp
+  BOOL GetQueuedCompletionStatus(
+      HANDLE CompletionPort,        // handle to completion port
+      LPDWORD lpNumberOfBytes,      // bytes transferred
+      PULONG_PTR lpCompletionKey,   // file completion key
+      LPOVERLAPPED *lpOverlapped,   // buffer
+      DWORD dwMilliseconds       　 // optional timeout value
+  );
+  ```
+  * 解說
+    1. 第一個參數指出了線程要監視哪一個完成端口
+    2. 很多服務應用程式只是使用一個I/O完成端口，所有的I/O請求完成以後的通知都將發給該端口
+
+  * 功能(情境)
+    1. dwMilliseconds是可以等待一個completion packet出現的時間，時間內沒出現會直接return並return FALSE，*lpOverlapped是NULL
+      * dwMilliseconds is INFINITE: never time out
+      * dwMilliseconds is 0: if there is no I/O operation to dequeue, the function will timeout immediately
+    2. 回傳值: Returns nonzero (TRUE) if successful or zero (FALSE) otherwise.
