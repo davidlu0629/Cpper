@@ -71,6 +71,16 @@ COleDateTime::ParseDateTime(CString)
 * 邏輯座標:是為了屏蔽掉不同設備屬性差別而設置的抽象坐標系，是相對於設備座標的統一接口，在邏輯座標繪圖(CDC)，之後會由設備驅動去負責虛擬座標到實際設備座標之間的轉換，通常左上角為原點，x軸向右為正，y軸向下為正
 #### GetWindowRect
 #### GetClientRect
+#### SetWindowPos設定物件位置
+```cpp=
+CRect rect;
+GetDesktopWindow()->GetWindowRect(&rect); // 抓運行機器螢幕大小by pixel
+
+CWnd* pwndCLabel;
+pwndCLabel = GetDlgItem(IDC_ALARMINFO); // 利用id抓物件(得到指標)，MFC中所有元件都算dialog?
+
+pwndCLabel->SetWindowPos(NULL, 0, 0, rect.BottomRight().x/4, rect.BottomRight().y/4, SWP_NOZORDER); // 設定元件位置，內容分別為(0, 0): 元件左上角相對畫面左上角距離by pixel，(rect.BottomRight().x/4, rect.BottomRight().y/4): 元件的寬與高 ; dialog使用SetWindowPos時上述4個參數會變為以螢幕左上角起點為標準的畫面左上角、右下角點
+```
 
 ### 建立視窗(中國用語:對話框?)(dialog)
 * MFC新建視窗需繼承CDialog中的OnInitDialog()，但不能用寫程式的方式完成新建視窗的動作，會無法通過編譯，需要手動到UI(.rc)介面新建類並在類中繼承虛擬函數中的OnInitDialog()
@@ -78,8 +88,8 @@ COleDateTime::ParseDateTime(CString)
 ### 一個視窗常用需手動建立連結的function
 * 需要手動到UI(.rc)介面新建類並在類中繼承虛擬函數
 * 功能:
-  1. 
-
+  1. Create
+  2. OnInitDialog
 
 ## IOCP
 ### 評論
