@@ -79,7 +79,10 @@ GetDesktopWindow()->GetWindowRect(&rect); // 抓運行機器螢幕大小by pixel
 CWnd* pwndCLabel;
 pwndCLabel = GetDlgItem(IDC_ALARMINFO); // 利用id抓物件(得到指標)，MFC中所有元件都算dialog?
 
-pwndCLabel->SetWindowPos(NULL, 0, 0, rect.BottomRight().x/4, rect.BottomRight().y/4, SWP_NOZORDER); // 設定元件位置，內容分別為(0, 0): 元件左上角相對畫面左上角距離by pixel，(rect.BottomRight().x/4, rect.BottomRight().y/4): 元件的寬與高 ; dialog使用SetWindowPos時上述4個參數會變為以螢幕左上角起點為標準的畫面左上角、右下角點
+pwndCLabel->SetWindowPos(NULL, 0, 0, rect.BottomRight().x/4, rect.BottomRight().y/4, SWP_NOZORDER); // 設定元件位置
+//內容分別為(0, 0): 元件左上角相對畫面左上角距離by pixel
+//(rect.BottomRight().x/4, rect.BottomRight().y/4): 元件的寬與高
+//dialog使用SetWindowPos時上述4個參數會變為以螢幕左上角起點為標準的畫面左上角、右下角點
 ```
 
 ### 建立視窗(中國用語:對話框?)(dialog)
