@@ -1,6 +1,13 @@
 # Cpper
 C++相關知識
 
+## 目錄
+* 執行緒
+* 開檔共用規則
+* MFC
+* IOCP
+* 資料型態
+
 ## 執行緒(Multithread)
 * Reference: https://docs.microsoft.com/zh-tw/windows/win32/procthread/creating-threads
 * tip: 
@@ -58,6 +65,21 @@ COleDateTime::ParseDateTime(CString)
 ```
 ### CString functions / CString cheatsheet
 * Reference: https://docs.microsoft.com/zh-tw/cpp/atl-mfc-shared/reference/cstringt-class?view=msvc-170
+
+### 視窗大小、位置問題
+#### 共同點:
+* 邏輯座標:是為了屏蔽掉不同設備屬性差別而設置的抽象坐標系，是相對於設備座標的統一接口，在邏輯座標繪圖(CDC)，之後會由設備驅動去負責虛擬座標到實際設備座標之間的轉換，通常左上角為原點，x軸向右為正，y軸向下為正
+#### GetWindowRect
+#### GetClientRect
+
+### 建立視窗(中國用語:對話框?)(dialog)
+* MFC新建視窗需繼承CDialog中的OnInitDialog()，但不能用寫程式的方式完成新建視窗的動作，會無法通過編譯，需要手動到UI(.rc)介面新建類並在類中繼承虛擬函數中的OnInitDialog()
+
+### 一個視窗常用需手動建立連結的function
+* 需要手動到UI(.rc)介面新建類並在類中繼承虛擬函數
+* 功能:
+  1. 
+
 
 ## IOCP
 ### 評論
@@ -140,3 +162,9 @@ int main()
       * dwMilliseconds is INFINITE: never time out
       * dwMilliseconds is 0: if there is no I/O operation to dequeue, the function will timeout immediately
     2. 回傳值: Returns nonzero (TRUE) if successful or zero (FALSE) otherwise.
+
+## 資料型態
+### string 也可以存寬字符
+```cpp
+wstring a = L"string content";
+```
