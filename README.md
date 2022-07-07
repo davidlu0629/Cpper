@@ -2,11 +2,60 @@
 C++相關知識
 
 ## 目錄
+* 繼承
+* 虛擬(virtual)
 * 執行緒
 * 開檔共用規則
 * MFC
 * IOCP
 * 資料型態
+
+## 繼承
+* 概念:沿用程式碼來提升開發效率
+* 分類:
+  1. 公共繼承
+  2. 保護繼承
+  3. 私有繼承
+* ex. 父類別: Point2D，子類別: Point3D
+  ```cpp=
+  class Point2D { 
+  public: 
+      Point2D() {
+          _x = 0;
+          _y = 0;
+      }
+      Point2D(int x, int y) : _x(x), _y(y) {
+      }
+      int x() {return _x;} 
+      int y() {return _y;} 
+      void x(int x) {
+          _x = x;
+      }
+      void y(int y) {
+          _y = y;
+      }
+  private:
+      int _x;
+      int _y;
+  }; 
+  ```
+  ```cpp=
+  #include "Point2D.h"
+
+  class Point3D : public Point2D { 
+  public: 
+      Point3D() { 
+          _z = 0; 
+      } 
+      Point3D(int x, int y, int z) : Point2D(x, y), _z(z) { 
+      } 
+      int z() {return _z;}
+      void z(int z) {_z = z;}
+
+  private:
+      int _z;
+  }; 
+  ```
 
 ## 執行緒(Multithread)
 * Reference: https://docs.microsoft.com/zh-tw/windows/win32/procthread/creating-threads
