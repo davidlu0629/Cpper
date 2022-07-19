@@ -9,6 +9,7 @@ C++相關知識
 * MFC
 * IOCP
 * 資料型態
+* 
 
 ## 繼承
 * 概念:沿用程式碼來提升開發效率
@@ -229,4 +230,16 @@ int main()
 ### string 也可以存寬字符
 ```cpp
 wstring a = L"string content";
+```
+
+## bash
+### random time in sleep
+* %夾住變數來將文字轉成數字
+```cpp
+@echo off
+
+set /a num=%random% %%50 +1
+@ping 127.0.0.1 -n %num% -w 1000
+
+exit/B
 ```
